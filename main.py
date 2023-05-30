@@ -14,4 +14,9 @@ data = response.json()
 
 if starter == "start":
   print("you should go find a shiny " + data["name"])
-  print (data["abilities"])
+  abilities = [ability["ability"]["name"] for ability in data["abilities"]]
+  print("Here are the abilities:")
+  for ability in abilities:
+    print(ability)
+else:
+  starter=input("Please type in start to get a pokemon: ")
