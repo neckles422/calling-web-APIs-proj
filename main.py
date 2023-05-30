@@ -14,7 +14,8 @@ data = response.json()
 
 if starter == "start":
   print("you should go find a shiny " + data["name"])
-  abilities = [ability["ability"]["name"] for ability in data["abilities"]]
+  abilities = [ability["ability"]["name"] 
+  for ability in data["abilities"]]
   print("Here are the abilities:")
   for ability in abilities:
     print(ability)
