@@ -2,17 +2,9 @@ import requests
 import random
 import webbrowser
 
- 
-
 getpokemon = input("Welcome to the pokemon suggestion program. Enter start to recieve a pokemon suggestion:")
-
- 
-
 numb = random.randint(1,1015)
 URL = "https://pokeapi.co/api/v2/pokemon/" + str(numb)
-
- 
-
 
 def get_pokemon_data(pokemon_id):
     URL = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}"
@@ -20,8 +12,6 @@ def get_pokemon_data(pokemon_id):
     response.raise_for_status() # Throw an exception if the request failed
     data = response.json()
     return data
-
- 
 
 def get_pokemon_weaknesses(pokemon_types):
     URL = "https://pokeapi.co/api/v2/type/"
@@ -37,8 +27,6 @@ def get_pokemon_weaknesses(pokemon_types):
                     weak_type_name = weak_type["name"]
                     weaknesses[weak_type_name] = weaknesses.get(weak_type_name, 0) + 1
     return weaknesses
-
- 
 
 if getpokemon == "start":
   numb = random.randint(1, 1015)
@@ -59,12 +47,9 @@ if getpokemon == "start":
   for weakness, count in weaknesses.items():
       print(f"{weakness}")
 
- 
-
   picture_url = pokemon_data["sprites"]["front_default"]
   if picture_url:
     (webbrowser.open(picture_url))
 
- 
 
 else: getpokemon = input("Please type in start to find a Pokemon. ")
