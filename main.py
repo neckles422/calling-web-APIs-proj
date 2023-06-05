@@ -51,7 +51,7 @@ if getpokemon == "start":
 
   picture_url = pokemon_data["sprites"]["front_default"]
   if picture_url:
-    webbrowser.open(picture_url)
+    (webbrowser.open(picture_url))
 
 else: getpokemon = input("Please type in start to find a Pokemon. ")
   
