@@ -1,1 +1,1 @@
-Pokemon project to get a random pokemon to kidnap
+Pokemon project to get a random pokemon to kidnap on your next adventure 
