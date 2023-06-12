@@ -2,14 +2,14 @@ import requests
 import random
 import webbrowser
 
-getpokemon = input("Welcome to the pokemon suggestion program. Enter start to recieve a pokemon suggestion:")
-numb = random.randint(1,1015)
-URL = "https://pokeapi.co/api/v2/pokemon/" + str(numb)
+getpokemon = input("Welcome to the Pokémon suggestion program. Enter start to receive a Pokémon suggestion:")
+version = input("Enter the name of the game version you prefer (e.g., red, blue, emerald): ")
 
-def get_pokemon_data(pokemon_id):
-    URL = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}"
-    response = requests.get(URL) # Get data from the URL
-    response.raise_for_status() # Throw an exception if the request failed
+def get_pokemon_data(pokemon_id, version):
+    URL = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}/"
+    params = {'version': version}
+    response = requests.get(URL, params=params)  # Get data from the URL with version parameter
+    response.raise_for_status()  # Throw an exception if the request failed
     data = response.json()
     return data
 
@@ -29,27 +29,27 @@ def get_pokemon_weaknesses(pokemon_types):
     return weaknesses
 
 if getpokemon == "start":
-  numb = random.randint(1, 1015)
-  pokemon_data = get_pokemon_data(numb)
-  name = pokemon_data["name"]
-  print("You should go find a " + name.capitalize())
+    numb = random.randint(1, 1015)
+    pokemon_data = get_pokemon_data(numb, version)
+    name = pokemon_data["name"]
+    print("You should go find a " + name.capitalize())
 
-  types = [type_data["type"]["name"] for type_data in pokemon_data["types"]]
-  print("Types:", ", ".join(types))
+    types = [type_data["type"]["name"] for type_data in pokemon_data["types"]]
+    print("Types:", ", ".join(types))
 
-  abilities = [ability["ability"]["name"] for ability in pokemon_data["abilities"]]
-  print("Here are the abilities:")
-  for ability in abilities:
-      print(ability)
+    abilities = [ability["ability"]["name"] for ability in pokemon_data["abilities"]]
+    print("Here are the abilities:")
+    for ability in abilities:
+        print(ability)
 
-  weaknesses = get_pokemon_weaknesses(types)
-  print("Weaknesses:")
-  for weakness, count in weaknesses.items():
-      print(f"{weakness}")
+    weaknesses = get_pokemon_weaknesses(types)
+    print("Weaknesses:")
+    for weakness, count in weaknesses.items():
+        print(f"{weakness}")
 
-  picture_url = pokemon_data["sprites"]["front_default"]
-  if picture_url:
-    (webbrowser.open(picture_url))
+    picture_url = pokemon_data["sprites"]["front_default"]
+    if picture_url:
+        webbrowser.open(picture_url)
 
-
-else: getpokemon = input("Please type in start to find a Pokemon. ")
+else:
+    getpokemon = input("Please type in start to find a Pokémon. ")
